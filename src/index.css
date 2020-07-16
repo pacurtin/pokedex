@@ -1,0 +1,10 @@
+body {
+    margin:4em;
+    background: dodgerblue;
+    text-align: center;
+    font-family: Arial, serif;
+}
+
+#heading{
+    font-weight: 700;
+}
