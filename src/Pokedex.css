@@ -3,6 +3,54 @@
     width: 16em;
     height: 28em;
     margin: 0 auto;
-    padding: 1em;
     text-align: center;
+    display: grid;
+    grid-template-rows: 45% 20% 35%;
+    border-radius: 2px;
+}
+
+#screen {
+    background: #03d5ff;
+    grid-row: 1;
+    border-radius: 2px;
+    margin: 2em 2em 0 2em;
+}
+
+#selection-buttons {
+    grid-row: 2;
+}
+
+#selection-buttons button{
+    height:100%;
+    background:orangered;
+    border:none;
+    outline: none;
+}
+
+.arrow {
+    margin: 1.5em 1em 0 1em;
+    top:1em;
+    height:1.5em;
+    width:1.5em;
+    border: solid #36454F;
+    border-width: 0 1em 1em 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+#info {
+    grid-row: 3;
+    background: #cd5f5d;
+    border-radius: 2px;
+    margin: 0 2em 2em 2em;
 }
