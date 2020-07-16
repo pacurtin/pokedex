@@ -1,4 +1,5 @@
 import React from 'react';
+import Pokedex from "./Pokedex";
 
 function App() {
 
@@ -7,7 +8,7 @@ function App() {
       <div id="heading">
         Code Challenge - Blue Squad
       </div>
-
+      <Pokedex/>
     </div>
   );
 }
