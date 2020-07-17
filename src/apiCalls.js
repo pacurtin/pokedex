@@ -6,6 +6,11 @@ import axios from 'axios';
 *     Therefore the Express server is used as a proxy
 * */
 
+// get all pokemon id and names
+export function getPokemonList() {
+  return axios.get("/pokemonList");
+}
+
 // get pokemon by id number
 export function getPokemon(displayNum) {
   return axios.get("/pokemon/"+displayNum+"/");

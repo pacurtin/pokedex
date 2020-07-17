@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Pokedex from "./Pokedex";
-import {getPokemon} from "./apiCalls";
+import {getPokemon, getPokemonList} from "./apiCalls";
 
 export const changeEnum = {
   INCREMENT: 'increment',
@@ -15,19 +15,54 @@ function App() {
   *     I will use a hashmap to store the data.
   *     A JS object has a HashMap in its implementation so we just use that.
   * */
-  const totalPokemon = 807;
-  const [pokemonMap, setPokemonMap] = useState({}); // pokemons number will be its map key
-  const [displayNum, setDisplayNum] = useState(1);  // keeps track of current pokemon being displayed
+  const [pokemonMap, setPokemonMap] = useState({}); // stores each pokemons data pokemons id number will be its map key
+  const [displayIndex, setDisplayIndex] = useState(0);    // keeps track of current pokemon being displayed
+  const [pokemonLookupTable, setPokemonList] = useState([]);     // a list of names and id's.
 
-  // runs once to initialize app with our first pokemon and then again whenever displayNum changes
+  const debug = () => {
+    debugger;
+  };
+
+  function takeIdFromUrl(url){
+    const urlAry = url.split("/");
+    return urlAry[urlAry.length - 2];
+  }
+
+  // runs once to create a searchable lookup table
   useEffect(() => {
-    if(!pokemonMap.hasOwnProperty(displayNum)){
-      getPokemon(displayNum)
+
+    if(pokemonLookupTable.length<1){
+      getPokemonList()
         .then(res=>{
-          addNewPokemon(res.data);
+          setPokemonList(
+            res.data.results.map( result => {
+              return {
+                name:result.name,
+                id:takeIdFromUrl(result.url),
+              }
+            }))
         })
+        .finally(()=>       // get 1st pokemon Bulbasaurs info
+          getPokemon(1)
+            .then(res=>{
+              addNewPokemon(res.data);
+            })
+        )
+    }
+
+    // whenever a pokemon we havn't downloaded yet is requested this will be called
+    if(pokemonLookupTable[displayIndex]){
+      const id= pokemonLookupTable[displayIndex].id;
+      if(!pokemonMap.hasOwnProperty(id)){
+        getPokemon(id)
+          .then(res=>{
+            addNewPokemon(res.data);
+          })
       }
-  },[displayNum, pokemonMap]);
+    }
+
+  },[displayIndex, pokemonLookupTable, pokemonMap]);
+
 
   function addNewPokemon(newPokemon){
     setPokemonMap((prevMap)=>{
@@ -37,13 +72,13 @@ function App() {
 
   function changePokemon(instruction) {
     if (instruction===changeEnum.INCREMENT){
-      setDisplayNum((prevNum)=>{
-        if(prevNum<totalPokemon) return prevNum+1;
-        else return 1;
+      setDisplayIndex((prevNum)=>{
+        if(prevNum<pokemonLookupTable.length-1) return prevNum+1;
+        else return 0;
       })
     } else if (instruction===changeEnum.DECREMENT) {
-      setDisplayNum((prevNum)=>{
-        if(prevNum===1) return totalPokemon;
+      setDisplayIndex((prevNum)=>{
+        if(prevNum===1) return pokemonLookupTable.length-1;
         else return prevNum-1;
       })
     }
@@ -54,11 +89,13 @@ function App() {
       <div id="heading">
         Code Challenge - Blue Squad
       </div>
+      <button onClick={debug}>Debug</button>
       {
-        pokemonMap && displayNum &&
+        pokemonLookupTable[displayIndex] &&
+        pokemonLookupTable[displayIndex].id &&
+        pokemonMap[pokemonLookupTable[displayIndex].id] &&
         <Pokedex
-          pokemonMap={pokemonMap}
-          displayNum={displayNum}
+          pokemon={pokemonMap[pokemonLookupTable[displayIndex].id]}
           changePokemon={changePokemon}
         />
       }

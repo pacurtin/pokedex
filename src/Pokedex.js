@@ -3,28 +3,20 @@ import "./Pokedex.css";
 import {changeEnum} from "./App";
 
 /*
-* Takes an map of pokemon and a pokemon number
-* Displays that pokemons info
+* Receives a pokemon's info and displays it
 * Has buttons to cycle through sequential
 * TODO Search function
 * */
 function Pokedex(props) {
-  const {pokemonMap, displayNum, changePokemon} = props;
-  const displayMon = displayPokemon();
-
-  function displayPokemon() {
-    return pokemonMap.hasOwnProperty(displayNum) ?
-      pokemonMap[displayNum] :
-      {};
-  }
+  const {pokemon, changePokemon} = props;
 
   return (
     <div id="device">
       <div id="screen">
         {
-          displayMon &&
-          displayMon.sprites &&
-          <img alt="pokemon portrait" src={displayMon.sprites.front_default}/>
+          pokemon &&
+          pokemon.sprites &&
+          <img alt="pokemon portrait" src={pokemon.sprites.front_default}/>
         }
       </div>
       <div id="selection-buttons">
@@ -37,25 +29,30 @@ function Pokedex(props) {
       </div>
       <div id="info">
         {
-          !displayMon.id &&
+          pokemon &&
+          !pokemon.id &&
           <h2>Loading</h2>
         }
         {
-          displayMon.id &&
-          <h3>#{displayMon.id}</h3>
+          pokemon &&
+          pokemon.id &&
+          <h3>#{pokemon.id}</h3>
         }
         {
-          displayMon.name &&
-          <p>Name: {displayMon.name}</p>
+          pokemon &&
+          pokemon.name &&
+          <p>Name: {pokemon.name}</p>
         }
         {
-          displayMon.weight &&
-          <p>Weight: {displayMon.weight/10}kg</p>
+          pokemon &&
+          pokemon.weight &&
+          <p>Weight: {pokemon.weight/10}kg</p>
         }
 
         {
-          displayMon.height &&
-          <p>Height: {displayMon.height/10}m</p>
+          pokemon &&
+          pokemon.height &&
+          <p>Height: {pokemon.height/10}m</p>
         }
       </div>
     </div>
