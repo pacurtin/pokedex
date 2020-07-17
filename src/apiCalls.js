@@ -5,10 +5,8 @@ import axios from 'axios';
 *     Calls can't be made directly from client due to CORS
 *     Therefore the Express server is used as a proxy
 * */
-export function getTotalPokemon() {
-  return axios.get("/pokemon/");
-}
 
+// get pokemon by id number
 export function getPokemon(displayNum) {
   return axios.get("/pokemon/"+displayNum+"/");
 }

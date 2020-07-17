@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Pokedex.css";
+import {changeEnum} from "./App";
 
 /*
 * Takes an map of pokemon and a pokemon number
@@ -8,7 +9,7 @@ import "./Pokedex.css";
 * TODO Search function
 * */
 function Pokedex(props) {
-  const {pokemonMap, displayNum} = props;
+  const {pokemonMap, displayNum, changePokemon} = props;
   const displayMon = displayPokemon();
 
   function displayPokemon() {
@@ -27,10 +28,10 @@ function Pokedex(props) {
         }
       </div>
       <div id="selection-buttons">
-        <button>
+        <button onClick={ () => changePokemon(changeEnum.DECREMENT)}>
           <i className="arrow left"/>
         </button>
-        <button>
+        <button onClick={ () => changePokemon(changeEnum.INCREMENT)}>
           <i className="arrow right"/>
         </button>
       </div>
