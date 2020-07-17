@@ -1,4 +1,5 @@
-const express = require("express");
+const express = require('express');
+const axios = require('axios');
 const app = express(); // create express app
 
 // middle wares
@@ -10333,12 +10334,13 @@ app.listen(3001, () => {
 
 app.get('/well', function (req, res) {
   console.log("Hello");
-  res.send('hello world')
+  res.send('hello world');
 });
 
-app.get('/pokemon', function(req,res) {
-  console.log("pokemon");
-  res.send(bulb);
+app.get('/pokemon/bulbasaur', function(req,res) {
+  axios.get("https://pokeapi.co/api/v2/pokemon/bulbasaur").then(response=>{
+    res.send(response.data);
+  });
 });
 
 
