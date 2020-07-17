@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
 const app = express();
 
 // serve up the prod build of app. need to run build first.
@@ -10334,8 +10335,8 @@ app.listen(3001, () => {
 });
 
 // get pokemon info from API and pass it to client
-app.get('/pokemon/bulbasaur', function(req,res) {
-  axios.get("https://pokeapi.co/api/v2/pokemon/bulbasaur").then(response=>{
+app.get('/pokemon/1', function(req,res) {
+  axios.get("https://pokeapi.co/api/v2/pokemon/1").then(response=>{
     res.send(response.data);
   });
 });

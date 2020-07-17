@@ -9,11 +9,12 @@ import "./Pokedex.css";
 * */
 function Pokedex(props) {
   const {pokemonMap, displayNum} = props;
-  const displayMon = displayPokemon()
+  const displayMon = displayPokemon();
 
   function displayPokemon() {
-    debugger;
-    return pokemonMap.hasOwnProperty(displayNum) ? pokemonMap[displayNum] : {};
+    return pokemonMap.hasOwnProperty(displayNum) ?
+      pokemonMap[displayNum] :
+      {};
   }
 
   return (
@@ -34,10 +35,27 @@ function Pokedex(props) {
         </button>
       </div>
       <div id="info">
-        <h3>#{displayMon.id}</h3>
-        <p style={{textTransform: 'capitalize'}}>Name: {displayMon.name}</p>
-        <p>Weight: {displayMon.weight/10}kg</p>
-        <p>Height: {displayMon.height/10}m</p>
+        {
+          !displayMon.id &&
+          <h2>Loading</h2>
+        }
+        {
+          displayMon.id &&
+          <h3>#{displayMon.id}</h3>
+        }
+        {
+          displayMon.name &&
+          <p>Name: {displayMon.name}</p>
+        }
+        {
+          displayMon.weight &&
+          <p>Weight: {displayMon.weight/10}kg</p>
+        }
+
+        {
+          displayMon.height &&
+          <p>Height: {displayMon.height/10}m</p>
+        }
       </div>
     </div>
   );
