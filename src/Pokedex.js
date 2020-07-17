@@ -1,6 +1,12 @@
 import React from 'react';
 import "./Pokedex.css";
 
+/*
+* Takes an array of pokemon and a pokemon number
+* Displays that pokemons info
+* Has buttons to cycle through the array
+* TODO Search function
+* */
 function Pokedex(props) {
   const {pokemon} = props;
 

@@ -1,10 +1,11 @@
 const express = require('express');
 const axios = require('axios');
-const app = express(); // create express app
+const app = express();
 
-// middle wares
-//app.use(express.static(path.join(__dirname, ".", "build")));
+// serve up the prod build of app. need to run build first.
+app.use(express.static(path.join(__dirname, ".", "build")));
 
+// sample of pokemon data received
 const bulb = {
   "abilities": [
     {
@@ -10332,11 +10333,7 @@ app.listen(3001, () => {
   console.log("server started on port 3001");
 });
 
-app.get('/well', function (req, res) {
-  console.log("Hello");
-  res.send('hello world');
-});
-
+// get pokemon info from API and pass it to client
 app.get('/pokemon/bulbasaur', function(req,res) {
   axios.get("https://pokeapi.co/api/v2/pokemon/bulbasaur").then(response=>{
     res.send(response.data);
