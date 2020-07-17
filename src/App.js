@@ -19,18 +19,14 @@ function App() {
   const [displayIndex, setDisplayIndex] = useState(0);    // keeps track of current pokemon being displayed
   const [pokemonLookupTable, setPokemonList] = useState([]);     // a list of names and id's.
 
-  const debug = () => {
-    debugger;
-  };
-
   function takeIdFromUrl(url){
     const urlAry = url.split("/");
     return urlAry[urlAry.length - 2];
   }
 
-  // runs once to create a searchable lookup table
-  useEffect(() => {
 
+  useEffect(() => {
+    // runs once to create a searchable lookup table
     if(pokemonLookupTable.length<1){
       getPokemonList()
         .then(res=>{
@@ -89,11 +85,9 @@ function App() {
       <div id="heading">
         Code Challenge - Blue Squad
       </div>
-      <button onClick={debug}>Debug</button>
       {
         pokemonLookupTable[displayIndex] &&
         pokemonLookupTable[displayIndex].id &&
-        pokemonMap[pokemonLookupTable[displayIndex].id] &&
         <Pokedex
           pokemon={pokemonMap[pokemonLookupTable[displayIndex].id]}
           changePokemon={changePokemon}

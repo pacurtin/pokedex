@@ -16,6 +16,7 @@ function Pokedex(props) {
         {
           pokemon &&
           pokemon.sprites &&
+          pokemon.sprites.front_default &&
           <img alt="pokemon portrait" src={pokemon.sprites.front_default}/>
         }
       </div>
