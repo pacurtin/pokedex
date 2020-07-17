@@ -9,11 +9,22 @@
     border-radius: 2px;
 }
 
+#device p {
+    font-size: 0.8em;
+    margin:0;
+    padding:0.2em;
+}
+
 #screen {
     background: #03d5ff;
     grid-row: 1;
     border-radius: 2px;
     margin: 2em 2em 0 2em;
+}
+
+#screen img{
+    height:100%;
+    width:100%;
 }
 
 #selection-buttons {
