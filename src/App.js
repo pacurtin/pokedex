@@ -4,15 +4,27 @@ import {getBulbasaur} from "./apiCalls";
 
 function App() {
 
-  const [pokemon, setPokemon] = useState([]);       // array to store pokemon from API
+  /*
+  *     To avoid hammering the API I will only request data from the API as needed
+  *     I will however save anything I get to avoid multiple requests for the same pokemon data
+  *     Since we will be filling in our data in a piecemeal fashion and potentially out of order
+  *     I will use a hashmap to store the data.
+  *     A JS object has a HashMap in its implementation so we just use that.
+  * */
+  const [pokemonMap, setPokemonMap] = useState({}); // pokemons number will be its map key
   const [displayNum, setDisplayNum] = useState(1);  // keeps track of current pokemon being displayed
 
-  // runs once to initilize app with our first pokemon
+  function addNewPokemon(newPokemon){
+    setPokemonMap((prevMap)=>{
+      return {...prevMap, [newPokemon.id]:newPokemon};
+    })
+  }
+
+  // runs once to initialize app with our first pokemon
   useEffect(() => {
     getBulbasaur()
       .then(res=>{
-        console.log(res.data);
-        setPokemon(res.data);
+        addNewPokemon(res.data);
       })
   },[]);
 
@@ -21,9 +33,14 @@ function App() {
       <div id="heading">
         Code Challenge - Blue Squad
       </div>
-      <Pokedex
-        pokemon={pokemon}
-        displayNum={displayNum}/>
+      {
+        pokemonMap && displayNum &&
+        <Pokedex
+          pokemonMap={pokemonMap}
+          displayNum={displayNum}
+        />
+      }
+
     </div>
   );
 }

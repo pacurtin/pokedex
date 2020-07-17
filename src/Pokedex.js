@@ -2,21 +2,27 @@ import React from 'react';
 import "./Pokedex.css";
 
 /*
-* Takes an array of pokemon and a pokemon number
+* Takes an map of pokemon and a pokemon number
 * Displays that pokemons info
-* Has buttons to cycle through the array
+* Has buttons to cycle through sequential
 * TODO Search function
 * */
 function Pokedex(props) {
-  const {pokemon} = props;
+  const {pokemonMap, displayNum} = props;
+  const displayMon = displayPokemon()
+
+  function displayPokemon() {
+    debugger;
+    return pokemonMap.hasOwnProperty(displayNum) ? pokemonMap[displayNum] : {};
+  }
 
   return (
     <div id="device">
       <div id="screen">
         {
-          pokemon &&
-          pokemon.sprites &&
-          <img alt="pokemon portrait" src={pokemon.sprites.front_default}/>
+          displayMon &&
+          displayMon.sprites &&
+          <img alt="pokemon portrait" src={displayMon.sprites.front_default}/>
         }
       </div>
       <div id="selection-buttons">
@@ -28,10 +34,10 @@ function Pokedex(props) {
         </button>
       </div>
       <div id="info">
-        <h3>#{pokemon.id}</h3>
-        <p style={{textTransform: 'capitalize'}}>Name: {pokemon.name}</p>
-        <p>Weight: {pokemon.weight/10}kg</p>
-        <p>Height: {pokemon.height/10}m</p>
+        <h3>#{displayMon.id}</h3>
+        <p style={{textTransform: 'capitalize'}}>Name: {displayMon.name}</p>
+        <p>Weight: {displayMon.weight/10}kg</p>
+        <p>Height: {displayMon.height/10}m</p>
       </div>
     </div>
   );
