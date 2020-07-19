@@ -20,8 +20,8 @@ app.get('/pokemon/:id', function(req,res) {
   });
 });
 
-// get pokemon count
-app.get('/pokemon', function(req,res) {
+// get pokemon list of all pokemon in db
+app.get('/pokemonList', function(req,res) {
   axios.get(API+"/pokemon").then(response=>{
     res.send(response.data);
   });
