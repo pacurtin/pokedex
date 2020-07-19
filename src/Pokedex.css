@@ -1,12 +1,16 @@
 #device {
     background:orangered;
-    width: 16em;
-    height: 28em;
+    width: 18em;
+    height: 34em;
     margin: 0 auto;
     text-align: center;
     display: grid;
-    grid-template-rows: 45% 20% 35%;
+    grid-template-rows: 45% 7% 18% 30%;
     border-radius: 2px;
+}
+
+.no-image{
+    margin-top: 5em;
 }
 
 #device p {
@@ -27,8 +31,15 @@
     width:100%;
 }
 
-#selection-buttons {
+#search-row {
+    margin-top: 2px;
     grid-row: 2;
+}
+
+
+
+#selection-buttons {
+    grid-row: 3;
 }
 
 #selection-buttons button{
@@ -39,8 +50,7 @@
 }
 
 .arrow {
-    margin: 1.5em 1em 0 1em;
-    top:1em;
+    margin: 3em 1em;
     height:1.5em;
     width:1.5em;
     border: solid #36454F;
@@ -60,7 +70,7 @@
 }
 
 #info {
-    grid-row: 3;
+    grid-row: 4;
     background: #cd5f5d;
     border-radius: 2px;
     margin: 0 2em 2em 2em;
